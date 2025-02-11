@@ -1,0 +1,19 @@
+{
+  "name": "identity-reconciliation-service",
+  "version": "1.0.0",
+  "description": "A service for identity reconciliation",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/bhavyadeep-purswani/identity-reconciliation-service.git"
+  },
+  "author": "bhavyadeep-purswani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bhavyadeep-purswani/identity-reconciliation-service/issues"
+  },
+  "homepage": "https://github.com/bhavyadeep-purswani/identity-reconciliation-service#readme"
+}
