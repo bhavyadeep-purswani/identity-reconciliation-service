@@ -1,6 +1,7 @@
 {
   "name": "identity-reconciliation-service",
   "version": "1.0.0",
+  "type": "module",
   "description": "A service for identity reconciliation",
   "main": "src/server.ts",
   "scripts": {
