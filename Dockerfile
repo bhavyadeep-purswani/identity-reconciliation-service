@@ -5,7 +5,7 @@ FROM node:18
 WORKDIR /app
 
 # Copy package.json and package-lock.json
-COPY package*.json ./
+COPY package*.json tsconfig.json ./
 
 # Install dependencies
 RUN npm install
@@ -13,11 +13,14 @@ RUN npm install
 # Copy the rest of the application files
 COPY . .
 
+# Compile TypeScript to JavaScript
+RUN npm run build
+
 # Ensure the .env file is copied (optional, only needed if required at runtime)
 COPY .env .env
 
 # Expose the port the app runs on
 EXPOSE 3000
 
-# Set environment variables from the .env file at runtime
-CMD ["sh", "-c", "export $(cat .env | xargs) && node src/server.ts"]
+# Run the compiled JavaScript file
+CMD ["node", "dist/server.js"]
