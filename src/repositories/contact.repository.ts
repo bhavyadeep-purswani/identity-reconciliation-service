@@ -1,6 +1,7 @@
 import { Contact, LinkPrecedence } from "@prisma/client";
 import { prisma } from "../lib/prisma";
 
+// Create
 export const createContact = async (
     linkPrecedence: LinkPrecedence,
     email?: string, phoneNumber?: string,
@@ -17,6 +18,7 @@ export const createContact = async (
     });
 }
 
+// Update
 export const updateContact = async (
     id: number, linkPrecedence: LinkPrecedence,
     email?: string | null,
@@ -37,27 +39,44 @@ export const updateContact = async (
     });
 }
 
-export const findPrimaryContacts = async (
+export const updateContactToSecondary = async (
+    id: number,
+    primaryId: number,
+): Promise<Contact[]> => {
+    return prisma.contact.updateManyAndReturn({
+        where: {
+            OR: [
+                {
+                    id: id,
+                },
+                {
+                    linkedId: id,
+                }
+            ]
+        },
+        data: {
+            linkPrecedence: LinkPrecedence.secondary,
+            linkedId: primaryId,
+        }
+    });
+}
+
+// Retrive
+export const findContacts = async (
     email?: string,
     phoneNumber?: string
 ): Promise<Contact[] | null> => {
     return prisma.contact.findMany({
         where: {
-            AND: [
+            OR: [
                 {
-                    linkPrecedence: LinkPrecedence.primary,
+                    email: email,
                 },
                 {
-                    OR: [
-                        {
-                            email: email,
-                        },
-                        {
-                            phoneNumber: phoneNumber,
-                        }
-                    ],
+                    phoneNumber: phoneNumber,
                 }
             ],
+
 
         },
         orderBy: {
@@ -77,4 +96,14 @@ export const findAllSecondaryContacts = async (
             createdAt: 'asc',
         }
     });
+}
+
+export const getContact = async (
+    id: number
+): Promise<Contact | null> => {
+    return prisma.contact.findUnique({
+        where: {
+            id: id,
+        }
+    })
 }
