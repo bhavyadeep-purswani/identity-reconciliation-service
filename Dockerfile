@@ -20,4 +20,4 @@ COPY .env .env
 EXPOSE 3000
 
 # Set environment variables from the .env file at runtime
-CMD ["sh", "-c", "export $(cat .env | xargs) && node src/server.js"]
+CMD ["sh", "-c", "export $(cat .env | xargs) && node src/server.ts"]
