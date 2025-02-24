@@ -22,8 +22,5 @@ RUN npm run build
 # Ensure the .env file is copied (optional, only needed if required at runtime)
 COPY .env .env
 
-# Expose the port the app runs on
-EXPOSE 8000
-
 # Run the compiled JavaScript file
 CMD ["node", "dist/server.js"]

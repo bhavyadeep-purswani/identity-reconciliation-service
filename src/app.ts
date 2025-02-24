@@ -2,6 +2,9 @@ import express from "express";
 import cors from "cors";
 import errorHandler from "./middlewares/errorHandler";
 import identityRoutes from "./routes/identity.routes"
+import { config } from "dotenv";
+
+config();
 
 const app = express();
 
